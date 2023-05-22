@@ -14,6 +14,7 @@
                 <th scope="col">Gradazione</th>
                 <th scope="col">Estratto</th>
                 <th scope="col">Acidita</th>
+                <th scope="col">Azioni</th>
             </tr>
         </thead>
         <tbody>
@@ -27,8 +28,13 @@
                     <td>{{ $wine->gradazione }}</td>
                     <td>{{ $wine->estratto }}</td>
                     <td>{{ $wine->acidita }}</td>
+                    <td>
+                        <a href="{{ route('admin.wines.show', $wine) }}">Apri</a>
+                    </td>
                 </tr>
             @endforeach
         </tbody>
     </table>
+
+    <a href="{{ route('admin.wines.create') }}" class="btn btn-primary">Inserisci nuovo vino</a>
 @endsection

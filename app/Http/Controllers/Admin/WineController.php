@@ -5,6 +5,7 @@ namespace App\Http\Controllers\Admin;
 use App\Http\Controllers\Controller;
 use App\Models\Wine;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Validator;
 
 class WineController extends Controller
 {
@@ -27,7 +28,7 @@ class WineController extends Controller
      */
     public function create()
     {
-        //
+        return view('admin.wines.create');
     }
 
     /**
@@ -38,7 +39,16 @@ class WineController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $formData = $request->all();
+        $this->validation($formData);
+
+        $newWine = new Wine();
+
+        $newWine->fill($formData);
+
+        $newWine->save();
+
+        return redirect()->route('admin.wines.show', $newWine);
     }
 
     /**
@@ -49,7 +59,7 @@ class WineController extends Controller
      */
     public function show(Wine $wine)
     {
-        //
+        return view('admin.wines.show', compact('wine'));
     }
 
     /**
@@ -60,7 +70,7 @@ class WineController extends Controller
      */
     public function edit(Wine $wine)
     {
-        //
+        return view('admin.wines.edit', compact('wine'));
     }
 
     /**
@@ -72,7 +82,12 @@ class WineController extends Controller
      */
     public function update(Request $request, Wine $wine)
     {
-        //
+        $formData = $request->all();
+        $this->validation($formData);
+
+        $wine->update($formData);
+
+        return redirect()->route('admin.wines.show', $wine);
     }
 
     /**
@@ -83,6 +98,28 @@ class WineController extends Controller
      */
     public function destroy(Wine $wine)
     {
-        //
+        $wine->delete();
+
+        return redirect()->route('admin.wines.index');
+    }
+
+    private function validation($formData)
+    {
+        $validator = Validator::make(
+            $formData,
+            [
+                'nome' => 'required',
+                'annata' => 'required',
+                'cantina' => 'required',
+                'colore' => 'required',
+                'tipologia' => 'required',
+                'gradazione' => 'required',
+                'estratto' => 'required',
+                'acidita' => 'required'
+            ],
+            []
+        )->validate();
+
+        return $validator;
     }
 }
