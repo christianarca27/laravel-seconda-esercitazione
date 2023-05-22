@@ -15,6 +15,10 @@ return new class extends Migration
     {
         Schema::create('vines', function (Blueprint $table) {
             $table->id();
+
+            $table->string('nome', 50);
+            $table->string('descrizione');
+
             $table->timestamps();
         });
     }
