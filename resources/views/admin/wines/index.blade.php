@@ -22,7 +22,7 @@
                 <tr>
                     <td>{{ ucwords($wine->nome) }}</td>
                     <td>{{ $wine->annata }}</td>
-                    <td>{{ $wine->cantina }}</td>
+                    <td>{{ $wine->winery->nome ?? 'Nessuna' }}</td>
                     <td>{{ ucwords($wine->colore) }}</td>
                     <td>{{ ucwords($wine->tipologia) }}</td>
                     <td>{{ $wine->gradazione }}</td>

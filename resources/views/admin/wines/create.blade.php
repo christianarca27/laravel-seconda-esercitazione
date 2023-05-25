@@ -30,10 +30,18 @@
             </div>
 
             <div class="mb-3">
-                <label for="cantina">Cantina</label>
-                <input class="form-control @error('cantina') is-invalid @enderror" type="text" name="cantina"
-                    id="cantina" value="{{ old('cantina') }}">
-                @error('cantina')
+                <label for="cantina_id">Cantina</label>
+                <select class="form-select @error('cantina_id') is-invalid @enderror" id="cantina_id" name="cantina_id"
+                    required>
+                    <option value="" selected>Nessuno</option>
+
+                    @foreach ($wineries as $winery)
+                        <option value="{{ $winery->id }}" {{ $winery->id == old('cantina_id') ? 'selected' : '' }}>
+                            {{ $winery->nome }}</option>
+                    @endforeach
+                </select>
+
+                @error('cantina_id')
                     <div class="invalid-feedback">
                         {{ $message }}
                     </div>

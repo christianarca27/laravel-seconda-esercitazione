@@ -15,6 +15,7 @@
                     <th scope="col">Gradazione</th>
                     <th scope="col">Estratto</th>
                     <th scope="col">Acidita</th>
+                    <th scope="col">Vitigni</th>
                     <th scope="col">Azioni</th>
                 </tr>
             </thead>
@@ -22,12 +23,17 @@
                 <tr>
                     <td>{{ ucwords($wine->nome) }}</td>
                     <td>{{ $wine->annata }}</td>
-                    <td>{{ $wine->cantina }}</td>
+                    <td>{{ $wine->winery->nome ?? 'Nessuna' }}</td>
                     <td>{{ ucwords($wine->colore) }}</td>
                     <td>{{ ucwords($wine->tipologia) }}</td>
                     <td>{{ $wine->gradazione }}</td>
                     <td>{{ $wine->estratto }}</td>
                     <td>{{ $wine->acidita }}</td>
+                    <td>
+                        @foreach ($wine->vines as $vine)
+                            {{ $vine->nome }}
+                        @endforeach
+                    </td>
                     <td>
                         <a class="btn btn-primary mb-2" href="{{ route('admin.wines.edit', $wine) }}">Modifica</a>
 

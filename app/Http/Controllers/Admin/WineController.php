@@ -4,6 +4,7 @@ namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
 use App\Models\Wine;
+use App\Models\Winery;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Validator;
 
@@ -28,7 +29,9 @@ class WineController extends Controller
      */
     public function create()
     {
-        return view('admin.wines.create');
+        $wineries = Winery::all();
+
+        return view('admin.wines.create', compact('wineries'));
     }
 
     /**
@@ -70,7 +73,9 @@ class WineController extends Controller
      */
     public function edit(Wine $wine)
     {
-        return view('admin.wines.edit', compact('wine'));
+        $wineries = Winery::all();
+
+        return view('admin.wines.edit', compact('wine', 'wineries'));
     }
 
     /**
@@ -110,7 +115,7 @@ class WineController extends Controller
             [
                 'nome' => 'required',
                 'annata' => 'required',
-                'cantina' => 'required',
+                'cantina_id' => 'nullable|exists:wineries,id',
                 'colore' => 'required',
                 'tipologia' => 'required',
                 'gradazione' => 'required',
