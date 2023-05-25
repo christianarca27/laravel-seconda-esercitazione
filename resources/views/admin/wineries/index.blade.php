@@ -14,6 +14,7 @@
                 <th scope="col">Nazione</th>
                 <th scope="col">Telefono</th>
                 <th scope="col">Email</th>
+                <th scope="col">Azioni</th>
             </tr>
         </thead>
         <tbody>
@@ -27,8 +28,11 @@
                     <td>{{ $winery->nazione }}</td>
                     <td>{{ $winery->telefono }}</td>
                     <td>{{ $winery->email }}</td>
+                    <td><a href="{{ route('admin.wineries.show', $winery) }}">Apri</a></td>
                 </tr>
             @endforeach
         </tbody>
     </table>
+
+    <a href="{{ route('admin.wineries.create') }}" class="btn btn-primary">Inserisci nuova cantina</a>
 @endsection

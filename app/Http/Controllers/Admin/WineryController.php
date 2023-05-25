@@ -27,7 +27,7 @@ class WineryController extends Controller
      */
     public function create()
     {
-        //
+        return view('admin.wineries.create');
     }
 
     /**
@@ -49,7 +49,7 @@ class WineryController extends Controller
      */
     public function show(Winery $winery)
     {
-        //
+        return view('admin.wineries.show', compact('winery'));
     }
 
     /**
