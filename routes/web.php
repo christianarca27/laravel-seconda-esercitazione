@@ -4,7 +4,7 @@ use App\Http\Controllers\Admin\DashboardController;
 use App\Http\Controllers\Admin\VineController;
 use App\Http\Controllers\Admin\WineController;
 use App\Http\Controllers\Admin\WineryController;
-use App\Http\Controllers\Guest\PageController;
+use App\Http\Controllers\PageController;
 use App\Http\Controllers\ProfileController;
 use App\Models\Wine;
 use Illuminate\Support\Facades\Route;
@@ -21,8 +21,6 @@ use Illuminate\Support\Facades\Route;
 */
 
 Route::get('/', [PageController::class, 'home']);
-Route::get('/wines', [PageController::class, 'wines'])->name('guest.wines.index');
-Route::get('/wines/{wine}', [PageController::class, 'show'])->name('guest.wines.show');
 
 Route::middleware('auth')->group(function () {
     Route::get('/profile', [ProfileController::class, 'edit'])->name('profile.edit');
